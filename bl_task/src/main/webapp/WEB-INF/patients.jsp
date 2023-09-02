@@ -37,6 +37,7 @@
         <input type="hidden" name="lastId" value="<%=request.getParameter("lastId")%>" />
     <input type="hidden" name="buttonId" value="<%=request.getParameter("buttonId")%>" />
     <input type="hidden" name="dateId" value="<%=request.getParameter("dateId")%>" />
+    <input type="hidden" name="p" value="<%=request.getParameter("p")%>" />
         <input type="submit" value="Register">
     </form>
 </center>

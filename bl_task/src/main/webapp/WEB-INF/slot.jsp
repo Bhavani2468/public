@@ -54,7 +54,7 @@
 <script>
 <%
 List<String>ll=null;
-
+System.out.println("Entered slot page..");
 if(request.getParameter("p") .equals("res"))
 {
 	ll =(List<String>)request.getAttribute("slist");
@@ -65,6 +65,7 @@ else
 }
 %>
 var dateid=<%= request.getParameter("button") %>;
+
 window.onload = function()
 {
 <%
@@ -103,7 +104,7 @@ for(String d:ll)
 		
 	<%}%>
 	if(flag==0)
-		window.location.href = "patients?lastId="+encodeURIComponent(sid)+"&buttonId="+encodeURIComponent(slot)+"&dateId="+encodeURIComponent(dateid);
+		window.location.href = "patients?lastId="+encodeURIComponent(sid)+"&buttonId="+encodeURIComponent(slot)+"&dateId="+encodeURIComponent(dateid)+"&p="+encodeURIComponent("<%=request.getParameter("p")%>");
 	
 }
 

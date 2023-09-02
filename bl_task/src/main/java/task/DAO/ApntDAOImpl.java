@@ -1,5 +1,7 @@
 package task.DAO;
 import java.sql.Date;
+import java.math.BigDecimal;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -63,7 +65,7 @@ public class ApntDAOImpl implements ApntDAO{
 		}
 		
 		
-		System.out.println("Final date is "+sqlDate);
+		System.out.println("Final date of sept is "+sqlDate);
 		String timeStringFrom="";
 		String timeStringTo="";
 		if(buttonid==8)
@@ -111,20 +113,20 @@ public class ApntDAOImpl implements ApntDAO{
 	}
 	@Override
 	public List<Integer> adateList() {
-		return jdbcTemplate.queryForList("SELECT EXTRACT(DAY FROM ap_adate) FROM apmnt where EXTRACT(month FROM ap_adate)=8 group by ap_adate  having count(ap_adate)>=9", Integer.class);
+		return jdbcTemplate.queryForList("SELECT EXTRACT(DAY FROM ap_adate) FROM apmnt where EXTRACT(month FROM ap_adate)=9 group by ap_adate  having count(ap_adate)>=9", Integer.class);
 
 	}@Override
 	public List<String> slotList() {
 		
 		
-		List<Map<String, Object>> resultList = jdbcTemplate.queryForList("SELECT EXTRACT(DAY FROM slot_date) as day,EXTRACT(hour FROM slot_from) as sf FROM cl_acal where EXTRACT(month FROM slot_date)=8 group by (slot_date,slot_from)  having count(*)>=3");
+		List<Map<String, Object>> resultList = jdbcTemplate.queryForList("SELECT EXTRACT(DAY FROM slot_date) as day,EXTRACT(hour FROM slot_from) as sf FROM cl_acal where EXTRACT(month FROM slot_date)=9 group by (slot_date,slot_from)  having count(*)>=3");
 
 			List<String> l = new ArrayList<>();
 
 			for (Map<String, Object> row : resultList) {
-				Double dayDouble = (Double) row.get("day");
+				BigDecimal dayDouble = (BigDecimal) row.get("day");
 			    Integer day = (dayDouble != null) ? dayDouble.intValue() : null;
-			    Double sfv = (Double) row.get("sf");
+			    BigDecimal sfv = (BigDecimal) row.get("sf");
 			    Integer slotId = (sfv != null) ? sfv.intValue() : null;
 			    
 
