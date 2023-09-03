@@ -7,12 +7,14 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <style>
-
+body
+{
+	 background: linear-gradient(to bottom, #11998e, #38ef7d);
+}
 .container {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
 }
 
 .button-table {
@@ -69,7 +71,9 @@ function slots(name)
 }
 function goToSep()
 {
-	window.location.href="res";	
+	var i= "<%=request.getParameter("img")%>";
+	var n= "<%=request.getParameter("name")%>";
+	window.location.href="res?img="+encodeURIComponent(i)+"&name="+encodeURIComponent(n);	
 }
 </script>
 
@@ -77,6 +81,13 @@ function goToSep()
 </head>
 <body>
 <Center>
+
+
+<img src="<%=request.getParameter("img")%>"   style="width:200px;height:200px;">
+<h4><%=request.getParameter("name")%></h4>
+
+
+
 <div class="container">
 <table class="button-table">
 <tr><td colspan="7"><h2><input type="button" value="<" id="m2" onclick="goToSep()"  style="width:25px;height:25px;background-color:white;padding:0px;font-size:20px;border: none;">October</h2></td></tr>
