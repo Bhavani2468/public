@@ -34,6 +34,7 @@ OPEN cur_weekpattern;
       (EXTRACT(HOUR FROM doctoravailablefrom) * 60 + EXTRACT(MINUTE FROM doctoravailablefrom))) / pat_slot
     INTO appointment_count
     FROM doctorschedule_bhaskar; 
+    CLOSE cur_weekpattern;
     RETURN appointment_count;
   END IF;
   end loop;
@@ -49,8 +50,165 @@ select * from doctorschedule_bhaskar;
 
 
 
+CREATE OR REPLACE FUNCTION GetWeekdayFromDate(doct_id int,input_date DATE) RETURNS INT AS $$
+DECLARE
+  weekday INT;
+BEGIN
+  SELECT EXTRACT(DOW FROM input_date) INTO weekday;
+  raise notice 'weekday is..%',weekday;
+  
+  RETURN GetAppointmentCount(doct_id, weekday); 
+END;
+$$ LANGUAGE plpgsql;
 
 
+select GetWeekdayFromDate(1,'09-23-2023')
+
+
+
+
+create table doctor_slots(slot_id serial primary key,slot_doct_id int,slot_date date,slot_from time,slot_to time,slot_status varchar(20),slot_count int);
+select * from doctor_slots;
+
+
+
+create table doctor_slots_range
+(
+    doct_id int,
+    noofdays int
+);
+insert into doctor_slots_range values(2, 45),
+(3, 45),
+(4, 45),
+(5, 45),
+(6, 45),
+(7, 45),
+(8, 45),
+(9, 45),
+(10, 45);
+
+
+
+
+CREATE OR REPLACE PROCEDURE GenerateDoctorSlots() LANGUAGE plpgsql AS $$
+DECLARE
+  doctor_record RECORD;
+  slot_date DATE;
+  slot_from time;
+  slot_to time;
+   no_of_days INT;
+   
+BEGIN
+  FOR doctor_record IN (SELECT * FROM doctorschedule_bhaskar) LOOP
+   raise notice 'doctor record is %',doctor_record;
+    SELECT noofdays INTO no_of_days
+    FROM doctor_slots_range
+    WHERE doct_id = doctor_record.doctorid;
+    
+	raise notice 'no of days...%',no_of_days;    
+	IF no_of_days IS NOT NULL AND no_of_days > 0 THEN
+	FOR i IN 0..no_of_days-1 LOOP
+      slot_date := CURRENT_DATE + i; 
+      raise notice 'entered here..%',EXTRACT(DOW FROM slot_date);
+      IF (select CheckWeekPattern(EXTRACT(DOW FROM slot_date)::text,(doctor_record.doctoravailableslot)::text)
+      ) THEN
+      raise notice 'entered here..%',i;
+        INSERT INTO doctor_slots (slot_doct_id, slot_date, slot_from, slot_to, slot_status, slot_count)
+        VALUES (
+          doctor_record.doctorid,
+          slot_date,
+          doctor_record.doctoravailablefrom ,
+          doctor_record.doctoravailableto ,
+          'Available',
+          (select GetWeekdayFromDate(doctor_record.doctorid,slot_date))
+        );
+      END IF;
+    END LOOP;
+    end if;
+  END LOOP;
+END;
+$$;
+
+
+
+
+
+
+
+call GenerateDoctorSlots();
+
+
+CREATE OR REPLACE FUNCTION CheckWeekPattern(weekday text, weekpattern TEXT) RETURNS BOOLEAN AS $$
+BEGIN
+  IF POSITION(weekday IN weekpattern) > 0 THEN
+    RETURN TRUE;
+  ELSE
+    RETURN FALSE;
+  END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+
+select CheckWeekPattern(2,'135');
+
+
+select * from doctor_slots;
+
+select slot_date from doctor_slots where slot_doct_id=1 order by slot_date desc limit 1;
+
+
+CREATE OR REPLACE PROCEDURE updateDoctorSlots() LANGUAGE plpgsql AS $$
+DECLARE
+  doctor_record RECORD;
+  slot_dat DATE;
+  slot_from time;
+  slot_to time;
+   no_of_days INT;
+   lower_bound date;
+   upper_bound date;
+   gap int;
+   
+BEGIN
+	
+  FOR doctor_record IN (SELECT * FROM doctorschedule_bhaskar) LOOP
+  
+  raise notice 'doctor record is %',doctor_record;
+    SELECT noofdays INTO no_of_days
+    FROM doctor_slots_range
+    WHERE doct_id = doctor_record.doctorid;
+  
+  select slot_date into lower_bound from doctor_slots where slot_doct_id=doctor_record.doctorid order by slot_date desc limit 1;
+  
+  upper_bound := current_date + no_of_days;
+  
+  gap:=upper_bound-lower_bound;
+   
+    
+	raise notice 'no of days...%',no_of_days;    
+	IF no_of_days IS NOT NULL AND no_of_days > 0 THEN
+	FOR i IN 0..gap-1 LOOP
+      slot_dat := lower_bound + i; 
+      raise notice 'entered here..%',EXTRACT(DOW FROM slot_dat);
+      IF (select CheckWeekPattern(EXTRACT(DOW FROM slot_dat)::text,(doctor_record.doctoravailableslot)::text)
+      ) THEN
+      raise notice 'entered here..%',i;
+        INSERT INTO doctor_slots (slot_doct_id, slot_date, slot_from, slot_to, slot_status, slot_count)
+        VALUES (
+          doctor_record.doctorid,
+          slot_dat,
+          doctor_record.doctoravailablefrom ,
+          doctor_record.doctoravailableto ,
+          'Available',
+          (select GetWeekdayFromDate(doctor_record.doctorid,slot_dat))
+        );
+      END IF;
+    END LOOP;
+    end if;
+  END LOOP;
+END;
+$$;
+
+call updateDoctorSlots();
 
 
 
