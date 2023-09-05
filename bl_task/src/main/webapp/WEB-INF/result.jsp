@@ -5,16 +5,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Slot Booking</title>
+<title>Insert title here</title>
 <style>
-body
-{
-	 background: linear-gradient(to bottom, #11998e, #38ef7d);
-}
+
 .container {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh;
 }
 
 .button-table {
@@ -64,30 +62,18 @@ function slots(name)
 		}
 		
 	<%}%>
-	
 	if(flag==0)
 		window.location.href = "slot?button=" + encodeURIComponent(name)+"&p="+encodeURIComponent("res");
 	
 }
 function goToOct()
 {
-	var i= "<%=request.getParameter("img")%>";
-	var n= "<%=request.getParameter("name")%>";
-	window.location.href="october?img="+encodeURIComponent(i)+"&name="+encodeURIComponent(n);	
+	window.location.href="october";	
 }
 </script>
 </head>
 <body>
 <Center>
-
-<img src="<%=request.getParameter("img")%>"   style="width:200px;height:200px;">
-<h4><%=request.getParameter("name")%></h4>
-
-
-
-
-
-
 <div class="container">
 <table class="button-table">
 <tr><td colspan="7"><h2>September<input type="button" value=">" id="m2" onclick="goToOct()"  style="width:25px;height:25px;background-color:white;padding:0px;font-size:20px;border: none;"></h2></td></tr>

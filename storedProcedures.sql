@@ -33,7 +33,7 @@ OPEN cur_weekpattern;
       ((EXTRACT(HOUR FROM doctoravailableto) * 60 + EXTRACT(MINUTE FROM doctoravailableto)) -
       (EXTRACT(HOUR FROM doctoravailablefrom) * 60 + EXTRACT(MINUTE FROM doctoravailablefrom))) / pat_slot
     INTO appointment_count
-    FROM doctorschedule_bhaskar; 
+    FROM doctorschedule_bhaskar where doctorid=doct_id and doctorschedule=weekpattern;
     CLOSE cur_weekpattern;
     RETURN appointment_count;
   END IF;
@@ -110,7 +110,7 @@ BEGIN
 	FOR i IN 0..no_of_days-1 LOOP
       slot_date := CURRENT_DATE + i; 
       raise notice 'entered here..%',EXTRACT(DOW FROM slot_date);
-      IF (select CheckWeekPattern(EXTRACT(DOW FROM slot_date)::text,(doctor_record.doctoravailableslot)::text)
+      IF (select CheckWeekPattern(EXTRACT(DOW FROM slot_date)::text,(doctor_record.doctorschedule)::text)
       ) THEN
       raise notice 'entered here..%',i;
         INSERT INTO doctor_slots (slot_doct_id, slot_date, slot_from, slot_to, slot_status, slot_count)
@@ -131,9 +131,9 @@ $$;
 
 
 
+truncate doctor_slots
 
-
-
+select * from doctor_slots;
 
 call GenerateDoctorSlots();
 
@@ -153,6 +153,10 @@ select CheckWeekPattern(2,'135');
 
 
 select * from doctor_slots;
+
+select slot_doct_id from doctor_slots group by (slot_doct_id,slot_date) having count(*)>1 ;
+
+select slot_doct_id,slot_date,slot_count from doctor_slots where slot_doct_id=3 and slot_count>0;
 
 select slot_date from doctor_slots where slot_doct_id=1 order by slot_date desc limit 1;
 
@@ -210,6 +214,41 @@ $$;
 
 call updateDoctorSlots();
 
+
+
+CREATE OR REPLACE FUNCTION getDoctorSlotsGenerated(Docct_id INT) RETURNS TABLE (
+    slot_id int,
+    slot_doct_id INT,
+    slot_date DATE,
+    slot_from TIME,
+    slot_to TIME,
+    slot_status VARCHAR(20),
+    slot_count INT
+) AS $$
+DECLARE
+    lower_bound DATE;
+    upper_bound DATE;
+    drange int;
+BEGIN
+    lower_bound := CURRENT_DATE;
+    
+    SELECT noofdays INTO drange
+    FROM doctor_slots_range
+    WHERE doct_id = Docct_id;
+    
+    upper_bound := lower_bound+drange;
+    
+    RETURN QUERY
+    SELECT *
+    FROM doctor_slots
+    WHERE doctor_slots.slot_doct_id = Docct_id
+      AND doctor_slots.slot_date BETWEEN lower_bound AND upper_bound and doctor_slots.slot_count>0;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP FUNCTION getdoctorslotsgenerated(integer)
+
+select getDoctorSlotsGenerated(1);
 
 
 

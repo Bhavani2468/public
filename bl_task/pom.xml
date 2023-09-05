@@ -27,14 +27,10 @@
 			<version>4.3.9.RELEASE</version>
 		</dependency>
 
+
 		<dependency>
-			<groupId>SpringJDBC</groupId>
-			<artifactId>SpringJDBC</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>CRUD</groupId>
-			<artifactId>CRUD</artifactId>
+			<groupId>SpringFirst</groupId>
+			<artifactId>SpringFirst</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
   </dependencies>

@@ -7,7 +7,7 @@ public class Slot {
 	private int lastId;
 	private int buttonId;
 	private int dateId;
-	private String p;
+	
 
 	public int getLastId() {
 		return lastId;
