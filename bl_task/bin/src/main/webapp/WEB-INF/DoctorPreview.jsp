@@ -90,7 +90,6 @@
     ArrayList<Doctor> doclist = (ArrayList<Doctor>) request.getAttribute("doctors");
     if (doclist != null) {
         for (Doctor d : doclist) {
-        	int id = d.getDoctorid();
             String img = d.getPhoto();
             System.out.println(img);
             String name = d.getFullname();
@@ -103,7 +102,7 @@
             <div class="card-body">
                 <h5 class="card-title"><%= name %></h5>
                 <p class="card-text"><%= desp %></p>
-                <a href="doc?did=<%= id %>&img=<%= java.net.URLEncoder.encode(img, "UTF-8") %>&name=<%= name %>&qual=<%= qual %>&exp=<%= exp %>&desg=<%= desp %>" class="btn btn-view">View Doctor</a>
+                <a href="doc?img=<%= java.net.URLEncoder.encode(img, "UTF-8") %>&name=<%= name %>&qual=<%= qual %>&exp=<%= exp %>&desg=<%= desp %>" class="btn btn-view">View Doctor</a>
             </div>
         </div>
 <%

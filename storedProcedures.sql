@@ -77,7 +77,7 @@ create table doctor_slots_range
     doct_id int,
     noofdays int
 );
-insert into doctor_slots_range values(2, 45),
+insert into doctor_slots_range values(1,45),(2, 45),
 (3, 45),
 (4, 45),
 (5, 45),
@@ -87,7 +87,7 @@ insert into doctor_slots_range values(2, 45),
 (9, 45),
 (10, 45);
 
-
+truncate doctor_slots_range;
 
 
 CREATE OR REPLACE PROCEDURE GenerateDoctorSlots() LANGUAGE plpgsql AS $$
@@ -251,4 +251,34 @@ DROP FUNCTION getdoctorslotsgenerated(integer)
 select getDoctorSlotsGenerated(1);
 
 
+create table doctorschedule_bhaskar
+(
+	doctorid int,doctorslotindex int,doctorschedule varchar(10),doctoravailablefrom time,doctoravailableto time,doctoravailableslot int
+);
 
+insert into doctorschedule_bhaskar values(1,1,'135','09:00:00','12:00:00',15),
+(1,2,'246','14:00:00','17:00:00',30),
+(2,1,'135','10:00:00','13:00:00',15),
+(2,2,'246','15:00:00','18:00:00',30),
+(3,1,'146','08:00:00','11:00:00',15),
+(3,2,'127','09:00:00','12:00:00',20),
+(4,1,'135','14:00:00','17:00:00',15),
+(4,2,'246','10:00:00','13:00:00',30),
+(5,1,'257','15:00:00','18:00:00',20),
+(5,2,'346','08:00:00','11:00:00',10),
+(6,1,'12345','11:00:00','13:00:00',30),
+(7,1,'147','16:00:00','19:00:00',15),
+(8,1,'267','09:00:00','12:00:00',35),
+(9,1,'3467','14:30:00','17:30:00',20),
+(10,1,'67','14:30:00','17:30:00',10);
+
+select * from doctor_slots where slot_doct_id=1 and slot_status='booked';
+select * from doctor_slots where slot_date='2023-09-08' and slot_doct_id=1;
+rollback;
+update doctor_slots set slot_status='booked'  where slot_date='2023-09-09' and slot_doct_id=1;
+UPDATE doctor_slots SET slot_count = CASE WHEN slot_count > 1 THEN slot_count - 1 ELSE 0 END,slot_status = CASE WHEN slot_count = 1 THEN 'booked' ELSE slot_status END WHERE slot_date = '2023-09-09' and slot_doct_id=1
+
+
+
+
+select * from apmnt;

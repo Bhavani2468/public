@@ -57,7 +57,6 @@
 <% 
 	String img=request.getParameter("img");
 	System.out.println(img);
-	String id=""+request.getParameter("did");
 	String name=""+request.getParameter("name");
 	String qual=""+request.getParameter("qual");
 	String exp=""+request.getParameter("exp");
@@ -70,7 +69,7 @@
       <p class="card-text"><b>Qualification:</b> <%=qual %></p>
       <p class="card-text"><b>Experience:</b> <%=exp %> years</p>
       <p class="card-text"><b>Designation:</b> <%=desp %></p>
-      <a href="doctorslots?img=<%= java.net.URLEncoder.encode(img, "UTF-8") %>&did=<%= id %>&name=<%= name %>&qual=<%= qual %>&exp=<%= exp %>&desg=<%= desp %>" class="btn btn-primary">Book Appointment</a>
+      <a href="res?img=<%= java.net.URLEncoder.encode(img, "UTF-8") %>&name=<%= name %>&qual=<%= qual %>&exp=<%= exp %>&desg=<%= desp %>" class="btn btn-primary">Book Appointment</a>
     </div>
   </div>
 </body>

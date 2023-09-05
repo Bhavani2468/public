@@ -1,5 +1,6 @@
 package task.DAO;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,5 +37,14 @@ public class SlotsDAOImpl implements SlotsDAO {
 	{
 		jdbcTemplate.update("call updateDoctorSlots()");
 	}
+	@Override
+	public void updateSlotCount(Date sdate,int doctorid) {
+		jdbcTemplate.update("UPDATE doctor_slots SET slot_count = CASE WHEN slot_count > 1 THEN slot_count - 1 ELSE 0 END,slot_status = CASE WHEN slot_count = 1 THEN 'booked' ELSE slot_status END WHERE slot_date = ? and slot_doct_id= ?", new Object[]{sdate,doctorid});
+	}
 	
+	@Override
+	public List<DoctorSlot> checkBookedSlot(int doctorid)
+	{
+	    return jdbcTemplate.query("SELECT * FROM doctor_slots where slot_doct_id= ? and slot_status='booked'", new Object[]{doctorid}, new DoctorSlotMapper());
+	}
 }

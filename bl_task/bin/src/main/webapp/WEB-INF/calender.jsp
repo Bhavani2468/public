@@ -22,10 +22,9 @@
     </style>
 </head>
 <body>
-<center>
     <div id="calendar">
-        <div class="header" style="display: flex; justify-content: center; align-items: center;">
-            <button id="prev"><</button>	<h2 id="month-year"></h2>	<button id="next">></button>
+        <div class="header">
+            <button id="prev">Previous</button><h2 id="month-year"></h2><button id="next">Next</button>
         </div>
         <table>
             <thead>
@@ -42,16 +41,12 @@
             <tbody id="calendar-body"></tbody>
         </table>
     </div>
-    </center>
     <script>
     var slotString=[];
-    var bookedSlots=[];
     var i=0;
-    var j=0;
     var endYear;
     var endMonth;
     <% ArrayList<DoctorSlot> al=null;
-    ArrayList<DoctorSlot> bl=null;
 	if(request.getAttribute("slots")!=null)
 	{
 		al = (ArrayList<DoctorSlot>)request.getAttribute("slots");
@@ -62,20 +57,6 @@
 	%>
 			slotString[i]="<%=d.getSlotDate()%>";
 			i++;
-	<%	}
-		
-	}
-	
-	if(request.getAttribute("booked")!=null)
-	{
-		bl = (ArrayList<DoctorSlot>)request.getAttribute("booked");
-		
-		
-		for(DoctorSlot d:bl)
-		{
-	%>
-			bookedSlots[j]="<%=d.getSlotDate()%>";
-			j++;
 	<%	}
 		
 	}
@@ -127,35 +108,24 @@
 
                         	var d = year + '-' + formattedMonth + '-' + formattedDay;
                         	console.log(d);
-                        	var flag = 0;
-                        	for(let i=0;i<slotString.length;i++)
-                       		{
-                       			if(d===bookedSlots[i])
-                       			{
-                       				flag=1;
-                       				but.style.backgroundColor="red";
-                       			}
-                       		}
                         	
                         	for(let i=0;i<slotString.length;i++)
                        		{
-                       			if(flag==0 && d===slotString[i])
+                       			if(d===slotString[i])
                    				{
                    					but.style.backgroundColor="green";
                    					but.onclick = function() {
                    						
-                   						window.location.href="slots?slotdate="+slotString[i]+"&did="+<%= request.getParameter("did")%>;};
+                   						window.location.href="slots?slotdate="+slotString[i];};
                    					
                    				}
-                       			else if(but.style.backgroundColor!="green" && flag==0)
+                       			else if(but.style.backgroundColor!="green")
                        				{
                        					but.style.backgroundColor="gray";
                        				}
                        		}
                         	
                             but.textContent =dayCounter;
-                            but.style.width = "60px";
-                            but.style.height = "60px";
                             dayCounter++;
                             cell.appendChild(but);
                         } else {
