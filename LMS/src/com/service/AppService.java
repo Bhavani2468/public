@@ -48,4 +48,9 @@ public class AppService {
 	public List<LoanApplication> listAll() {
 		return serv.getAllLoanApplicants();
 	}
+
+	public void update(LoanApplication l) {
+		// TODO Auto-generated method stub
+		
+	}
 }

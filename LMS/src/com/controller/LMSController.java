@@ -52,10 +52,23 @@ public class LMSController {
 		System.out.println(c.toString());
 		System.out.println(l.toString());
 		System.out.println(n.toString());
+		System.out.println(1);
 		dao.addC(c);
+		System.out.println(2);
+		l.setLnap_cust_id(c.getCust_id());
+		n.setLnap_id(l.getLnap_id());
 		dao.addLa(l);
+		System.out.println(n.getLnap_id());
 		dao.addN(n);
+		System.out.println(4);
 		return "personaldetails";
 	}
 
+	@RequestMapping(value = "/id", method = RequestMethod.GET)
+	public String getAppById(@Validated LoanApplication l, Model mm) {
+		dao.update(l);
+		ArrayList<LoanApplication> al = (ArrayList<LoanApplication>) dao.listAll();
+		mm.addAttribute("ld", al);
+		return "loandetails";
+	}
 }
