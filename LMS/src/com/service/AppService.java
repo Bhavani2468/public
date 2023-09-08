@@ -1,21 +1,29 @@
 package com.service;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.Dao.DAO;
 import com.Dao.DAOImp;
+import com.Dao.UserCheckDAO;
 import com.models.Customer;
 import com.models.LoanApplicantNominee;
 import com.models.LoanApplication;
+import com.models.UserSession;
 
-@Component
+@Service
 public class AppService {
+	@Autowired
+	private UserCheckDAO usd;
 
-	private DAOImp serv;
+	@Autowired
+	private DAO serv;
 
 	@Autowired
 	public AppService(DAOImp serv) {
@@ -49,8 +57,28 @@ public class AppService {
 		return serv.getAllLoanApplicants();
 	}
 
-	public void update(LoanApplication l) {
-		// TODO Auto-generated method stub
+	public boolean checkUser(String username, String password) {
+		
+		
+		if(usd.validateUser(username,password))
+			return true;
+		return false;
 		
 	}
+
+
+	public void sendData(String sessionId, String key, String hostAddress) {
+		
+		UserSession us = null;
+		us.setUser_id(1);
+		us.setUssn_sessionid(sessionId);
+		us.setUssn_key(key);
+		us.setUssn_host(hostAddress);
+		us.setUssn_cdate(LocalDateTime.now());
+		us.setUssn_expdate(LocalDateTime.now().plusMinutes(30));
+		us.setUssn_status("ac");
+		
+		usd.persist(us);
+	}
+
 }

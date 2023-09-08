@@ -4,17 +4,15 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "H_customeres")
 public class Customer {
+	
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cust_id;
 	private String cust_firstname;
 	private String cust_lastname;
@@ -127,7 +125,6 @@ public class Customer {
 	public void setCust_luser(Integer cust_luser) {
 		this.cust_luser = cust_luser;
 	}
-
 	@Override
 	public String toString() {
 		return "Customer [cust_id=" + cust_id + ", cust_firstname=" + cust_firstname + ", cust_lastname="

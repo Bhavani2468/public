@@ -9,31 +9,6 @@
     
     <style>
     /* Reset some default browser styles */
-    
-        /* CSS for the popup */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            z-index: 1;
-        }
-        
-        /* CSS for the popup content */
-        .popup-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
-        }
-    
     body {
         margin: 0;
         padding-top: 100px;
@@ -170,36 +145,9 @@ input[type="number"] {
     function prevTab(tabIndex) {
         showTab(tabIndex - 1);
     }
-    
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelector('[name="lnap_nom_requested"]').addEventListener('change', function () {
-            generateNomineeFields();
-        });
-    });
-
-    function generateNomineeFields() {
-        const numNominees = parseInt(document.querySelector('[name="lnap_nom_requested"]').value, 10);
-        const nomineeFieldsContainer = document.getElementById('nominee-fields');
-        nomineeFieldsContainer.innerHTML = ''; 
-
-        for (let i = 0; i < numNominees; i++) {
-            const nomineeFieldset = document.createElement('fieldset');
-            const nomineeNumber = i + 1;
-            nomineeFieldset.innerHTML = '<legend>Nominee ' + nomineeNumber + '</legend>' +
-            '<input type="text" name="nominee_name_' + nomineeNumber + '" placeholder="Enter Nominee Name"><br>' +
-            '<input type="text" name="nominee_relation_' + nomineeNumber + '" placeholder="Enter Nominee Relation"><br>';
-
-            nomineeFieldsContainer.appendChild(nomineeFieldset);
-        }
-    }
-
-    
-    
     </script>
 </head>
 <body>
-
-   
     <center><h2 style="color: red;">Loan Application Form</h2></center>
     <div class="form-container">
         <div class="tabs">
@@ -210,83 +158,50 @@ input[type="number"] {
         <div class="form-box">
             <div class="form-part">
                 <form id="form-part-1">
-                	
                     <b>FirstName : </b>
-                    <input type="text" name="cust_firstname" placeholder="Enter FirstName"><br>
+                    <input type="text" name="fn" placeholder="Enter FirstName"><br>
                     <b>LastName : </b>
-                    <input type="text" name="cust_lastname" placeholder="Enter Last name"><br>
+                    <input type="text" name="ln" placeholder="Enter Last name"><br>
                     <b>DateOfBirth : </b><br>
-                    <input type="date" name="cust_dob" placeholder="Enter date of birth"><br>
+                    <input type="date" name="dob" placeholder="Enter date of birth"><br>
                     <b>Pancard No : </b>
-                    <input type="text" name="cust_panno" placeholder="Enter pancard number"><br>
+                    <input type="text" name="pan" placeholder="Enter pancard number"><br>
                     <b>Mobile Number : </b><br>
-                    <input type="tel" name="cust_mobile" placeholder="Enter mobile number"><br>
+                    <input type="tel" name="mbn" placeholder="Enter mobile number"><br>
                     <b>Address : </b>
-                    <input type="text" name="cust_address" placeholder="Enter address"><br>
+                    <input type="text" name="addr" placeholder="Enter address"><br>
                     <b>Guardian Name : </b>
-                    <input type="text" name="cust_gname" placeholder="Enter guardian name"><br>
-                   
+                    <input type="text" name="gn" placeholder="Enter guardian name"><br>
                     <button class="form-button" type="button" onclick="nextTab(0)">Next</button>
-                
-            </div>
-            <div class="form-part" style="display: none;">               
-               
-					<a href="loanEligibility.jsp">Check Loan Eligibility</a><br><br>             
-               
-                    <b >Loan Type : Personal</b><br><br>
-              
-                    <b>Loan Amount : </b><b name="lnap_amount"><%= request.getParameter("loanAmount")%></b><br><br>
-                    <b>EMI Amount : </b>
-                    <b name="lnap_emi_range_from" "><%= request.getParameter("emiAmount")%></b><br><br>
-                    
-                    <a href="emiSchedule.jsp?emiAmt=<%= request.getParameter("emiAmount") %>&months=<%= request.getParameter("months") %>">Check EMI Schedule</a><br><br> <br>
-                    
-                    <b>Number of Nominee : </b>
-                    <input type="number" name="lnap_nom_requested" placeholder="Enter number of nominee"><br>
-                    <b>cibil score : </b>
-                    <input type="number" name="lnap_cibil_Score" placeholder="Enter cibil score"><br>
-                    <button type="button" onclick="nextTab(1)" style="background-color: green;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: background-color 0.3s;">Next</button>
-                    <button type="button" onclick="prevTab(1)" style="background-color: green;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: background-color 0.3s;">Previous</button>
-                
+                </form>
             </div>
             <div class="form-part" style="display: none;">
-               
-                    <div id="nominee-fields"></div>
+                <h2>Loan Details</h2>
+                <form id="form-part-2">
+                    <b>Loan Type : </b>
+                    <input type="text" name="ltype" placeholder="Enter Loan Type"><br>
+                    <b>Loan Amount : </b>
+                    <input type="number" name="lamt" placeholder="Enter Loan Amount"><br>
+                    <b>Minimum EMI amount : </b>
+                    <input type="number" name="lbemi" placeholder="Enter minimum EMI Amount"><br>
+                    <b>Maximum EMI amount : </b>
+                    <input type="number" name="lhemi" placeholder="Enter maximum EMI Amount"><br>
+                    <b>Number Of Nominee : </b>
+                    <input type="number" name="ln" placeholder="Enter nominee count"><br>
+                    <button type="button" onclick="nextTab(1)">Next</button>
+                    <button type="button" onclick="prevTab(1)">Previous</button>
+                </form>
+            </div>
+            <div class="form-part" style="display: none;">
+                <h2>Nominee Details</h2>
+                <form id="form-part-3">
+                    <input type="text" name="field5" placeholder="Field 5"><br>
+                    <input type="text" name="field6" placeholder="Field 6"><br>
                     <button class="form-button" type="button" onclick="prevTab(2)">Previous</button>
-                    <button class="form-button" type="button" onclick="">Preview</button>
-               </form>
+                    <button class="form-button" type="submit">Submit</button>
+                </form>
             </div>
         </div>
     </div>
-     <!-- The popup itself -->
-    <div id="myPopup" class="popup">
-        <div class="popup-content">
-            
-            <button onclick="closePopup()">Edit</button>
-        </div>
-    </div>
-
-    <!-- JavaScript to handle the popup -->
-    <script>
-        function openPopup() {
-            document.getElementById("myPopup").style.display = "block";
-        }
-
-        function closePopup() {
-            document.getElementById("myPopup").style.display = "none";
-        }
-    </script>
 </body>
 </html>

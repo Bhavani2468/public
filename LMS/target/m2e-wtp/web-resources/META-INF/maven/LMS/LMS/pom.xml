@@ -65,6 +65,12 @@
 			<artifactId>hsqldb</artifactId>
 			<version>1.8.0.7</version>
 		</dependency>
+		<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>4.0.1</version> <!-- Use the appropriate version for your container -->
+    <scope>provided</scope>
+</dependency>
 
 	</dependencies>
   <build>

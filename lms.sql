@@ -68,6 +68,8 @@ create table H_users
 drop table H_users;
 select * from H_users;
 
+insert into H_users(user_name,user_pwd,user_email ,user_recoverymail, user_mobile , user_cdate ,user_type ) values();
+
 create table H_user_sessions
 (
     ussn_id serial primary key,
