@@ -49,8 +49,39 @@ FOR EACH ROW
 EXECUTE FUNCTION set_lemi_index();
 
 
+ 
 
 
+
+create table H_users
+(
+    user_id serial primary key,
+    user_name varchar(20),
+    user_pwd varchar(20),
+    user_email varchar(60),
+    user_recoverymail varchar(60),
+    user_mobile int,
+    user_cdate date,
+    user_type char(5)
+);
+
+drop table H_users;
+select * from H_users;
+
+create table H_user_sessions
+(
+    ussn_id serial primary key,
+    user_id int,
+    ussn_sessionid varchar(20),
+    ussn_cdate timestamp,
+    ussn_key varchar(100),
+    ussn_host varchar(20),
+    ussn_exptime timestamp,
+    ussn_status char(2)
+);
+drop table H_user_sessions;
+
+select * from H_user_sessions;
 
 
 
