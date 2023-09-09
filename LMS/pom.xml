@@ -66,13 +66,18 @@
 			<version>1.8.0.7</version>
 		</dependency>
 		<dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>javax.servlet-api</artifactId>
-    <version>4.0.1</version> <!-- Use the appropriate version for your container -->
-    <scope>provided</scope>
-</dependency>
+   		 	<groupId>javax.servlet</groupId>
+    			<artifactId>javax.servlet-api</artifactId>
+  	 		<version>4.0.1</version> <!-- Use the appropriate version for your container -->
+    			<scope>provided</scope>
+		</dependency>
 
-	</dependencies>
+		<dependency>
+			<groupId>CRUD</groupId>
+			<artifactId>CRUD</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+  </dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>

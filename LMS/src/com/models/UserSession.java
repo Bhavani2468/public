@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 public class UserSession {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int ussn_id;
 	private int user_id;
 	private String ussn_sessionid;
 	private LocalDateTime ussn_cdate;
@@ -16,6 +17,10 @@ public class UserSession {
 	private String ussn_host;
 	private LocalDateTime ussn_exptime;
 	private String ussn_status;
+	public int getUssn_id()
+	{
+		return ussn_id;
+	}
 	public int getUser_id() {
 		return user_id;
 	}

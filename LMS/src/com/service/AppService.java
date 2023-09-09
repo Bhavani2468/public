@@ -6,24 +6,20 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.Dao.DAO;
 import com.Dao.DAOImp;
 import com.Dao.UserCheckDAO;
 import com.models.Customer;
 import com.models.LoanApplicantNominee;
 import com.models.LoanApplication;
 import com.models.UserSession;
+import com.models.Users;
 
-@Service
+@Component
 public class AppService {
-	@Autowired
-	private UserCheckDAO usd;
 
-	@Autowired
-	private DAO serv;
+	private DAOImp serv;
 
 	@Autowired
 	public AppService(DAOImp serv) {
@@ -57,19 +53,29 @@ public class AppService {
 		return serv.getAllLoanApplicants();
 	}
 
-	public boolean checkUser(String username, String password) {
+	public void update(LoanApplication l) {
+		// TODO Auto-generated method stub
 		
+	}
+	
+	@Autowired
+	UserCheckDAO usd;
+	public boolean checkUser(String username, String password, String usertype) {
 		
-		if(usd.validateUser(username,password))
+		System.out.println("In service, validate user() "+usd.validateUser(username,password,usertype));
+		if(usd.validateUser(username,password,usertype))
 			return true;
 		return false;
 		
 	}
 
-
+	@Autowired
+	private UserSession us ;
+	
+	
+	@Transactional
 	public void sendData(String sessionId, String key, String hostAddress) {
 		
-		UserSession us = null;
 		us.setUser_id(1);
 		us.setUssn_sessionid(sessionId);
 		us.setUssn_key(key);
@@ -80,5 +86,4 @@ public class AppService {
 		
 		usd.persist(us);
 	}
-
 }

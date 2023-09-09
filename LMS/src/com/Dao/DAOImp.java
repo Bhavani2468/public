@@ -22,19 +22,22 @@ public class DAOImp implements DAO {
 	}
 
 	public void persist(LoanApplication la) {
-		em.persist(la);
+		em.merge(la);
 	}
 
 	public void persist(LoanApplicantNominee la) {
 		em.persist(la);
 	}
 
+	public void updaid(LoanApplication la) {
+		LoanApplication laa = (LoanApplication) em.createQuery("select e from LoanApplication e where e.lnap_id=:id")
+				.setParameter("id", la.getLnap_id()).getSingleResult();
+		laa.setLnap_status(la.getLnap_status());
+		laa.setLnap_conclusion_remarks(la.getLnap_conclusion_remarks());
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<LoanApplication> getAllLoanApplicants() {
 		return em.createQuery("SELECT la FROM LoanApplication la").getResultList();
-	}
-
-	public boolean validateUser(String username, String password) {
-		return false;
 	}
 }

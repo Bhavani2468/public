@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,21 +13,19 @@ import javax.persistence.Table;
 @Table(name = "H_loanApplicants")
 public class LoanApplication {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer lnap_id;
 	private Integer lnap_cust_id;
 	private Date lnap_apdate;
 	private BigDecimal lnap_lnty_id;
 	private double lnap_amount;
-	private double lnap_emi_range_from;
-	private double lnap_emi_range_to;
+	private double lnap_emi;
 	private double lnap_nom_requested;
 	private Integer lnap_cibil_Score;
 	private String lnap_status;
 	private String lnap_conclusion_remarks;
 	private Integer lnap_processed_user;
 	private Date lnap_processed_Date;
-
-	// Constructors
 
 	public LoanApplication() {
 		// Default constructor
@@ -71,20 +71,12 @@ public class LoanApplication {
 		this.lnap_amount = lnap_amount;
 	}
 
-	public double getLnap_emi_range_from() {
-		return lnap_emi_range_from;
+	public double getLnap_emi() {
+		return lnap_emi;
 	}
 
-	public void setLnap_emi_range_from(double lnap_emi_range_from) {
-		this.lnap_emi_range_from = lnap_emi_range_from;
-	}
-
-	public double getLnap_emi_range_to() {
-		return lnap_emi_range_to;
-	}
-
-	public void setLnap_emi_range_to(double lnap_emi_range_to) {
-		this.lnap_emi_range_to = lnap_emi_range_to;
+	public void setLnap_emi(double lnap_emi) {
+		this.lnap_emi = lnap_emi;
 	}
 
 	public double getLnap_nom_requested() {
@@ -138,11 +130,9 @@ public class LoanApplication {
 	@Override
 	public String toString() {
 		return "LoanApplication [lnap_id=" + lnap_id + ", lnap_cust_id=" + lnap_cust_id + ", lnap_apdate=" + lnap_apdate
-				+ ", lnap_lnty_id=" + lnap_lnty_id + ", lnap_amount=" + lnap_amount + ", lnap_emi_range_from="
-				+ lnap_emi_range_from + ", lnap_emi_range_to=" + lnap_emi_range_to + ", lnap_nom_requested="
-				+ lnap_nom_requested + ", lnap_cibil_Score=" + lnap_cibil_Score + ", lnap_status=" + lnap_status
-				+ ", lnap_conclusion_remarks=" + lnap_conclusion_remarks + ", lnap_processed_user="
-				+ lnap_processed_user + ", lnap_processed_Date=" + lnap_processed_Date + "]";
+				+ ", lnap_lnty_id=" + lnap_lnty_id + ", lnap_amount=" + lnap_amount + ", lnap_emi=" + lnap_emi
+				+ ", lnap_nom_requested=" + lnap_nom_requested + ", lnap_cibil_Score=" + lnap_cibil_Score
+				+ ", lnap_status=" + lnap_status + ", lnap_conclusion_remarks=" + lnap_conclusion_remarks
+				+ ", lnap_processed_user=" + lnap_processed_user + ", lnap_processed_Date=" + lnap_processed_Date + "]";
 	}
-	
 }

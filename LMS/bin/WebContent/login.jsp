@@ -5,6 +5,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #333;
+        }
+        
+        form {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px #aaa;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="password"],
+        select {
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <h2>Login</h2>
@@ -17,6 +68,7 @@
         
         <label for="usertype">User Type:</label>
         <select id="usertype" name="usertype">
+        	<option>select</option>
             <option value="user">User</option>
             <option value="admin">Admin</option>
         </select><br><br>
@@ -35,7 +87,7 @@
             if (userType === 'user') {
                 this.action = 'personaldetails.jsp'; 
             } else if (userType === 'admin') {
-                this.action = '#'; 
+                this.action = 'adminpage.jsp'; 
             }
 
      

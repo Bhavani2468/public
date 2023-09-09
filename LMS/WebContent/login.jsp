@@ -59,7 +59,7 @@
 </head>
 <body>
     <h2>Login</h2>
-    <form id="loginForm" method="gett">
+    <form id="loginForm" method="get">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br><br>
         
@@ -84,11 +84,16 @@
 			
             const userType = document.getElementById('usertype').value;
 
+            
  
             if (userType === 'user') {
-                this.action = 'personaldetails.jsp?username='+user+'&password='+pass; 
+            	
+                this.action = 'personaldetails?username='+user+'&password='+pass; 
+                
             } else if (userType === 'admin') {
-                this.action = 'adminpage.jsp?username='+user+'&password='+pass;
+            	
+                this.action = 'admin?username='+user+'&password='+pass;
+                
             }
 
      
@@ -97,4 +102,3 @@
     </script>
 </body>
 </html>
-

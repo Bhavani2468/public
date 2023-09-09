@@ -95,8 +95,6 @@
 		<input type="hidden" name="lnap_apdate" value="<%=l.getLnap_apdate() %>" placeholder="Enter Last name">
 		<input type="hidden" name="lnap_lnty_id" value="<%=l.getLnap_lnty_id() %>" placeholder="Enter hidden of birth">
 		<input type="hidden" name="lnap_amount" value="<%=l.getLnap_amount() %>" placeholder="Enter pancard number">
-		<input type="hidden" name="lnap_emi_range_from" value="<%=l.getLnap_emi_range_from() %>" placeholder="Enter mobile number">
-		<input type="hidden" name="lnap_emi_range_to"	value="<%=l.getLnap_emi_range_to() %>" placeholder="Enter address">
 		<input type="hidden" name="lnap_nom_requested" value="<%=l.getLnap_nom_requested() %>" placeholder="Enter guardian name">
 		<input type="hidden" name="lnap_cibil_Score" value="<%=l.getLnap_cibil_Score() %>" placeholder="Enter guardian name">
 		<input type="hidden" name="lnap_status" value="<%=l.getLnap_status() %>" placeholder="Enter guardian name">
@@ -122,8 +120,7 @@
 		<h5><b>l_ap_date:</b><%=l.getLnap_apdate() %></h5>
 		<h5><b>l_lty_id:</b><%=l.getLnap_lnty_id() %></h5>
 		<h5><b>l_amt:</b><%=l.getLnap_amount() %></h5>
-		<h5><b>l_range_from:</b><%=l.getLnap_emi_range_from() %></h5>
-		<h5><b>l_range_to:</b><%=l.getLnap_emi_range_to() %></h5>
+		
 		<h5><b>l_nom_req:</b><%=l.getLnap_nom_requested() %></h5>
 		<h5><b>cibil score:</b><%=l.getLnap_cibil_Score() %></h5>
 		<h5><b>l_status:</b><%=l.getLnap_status() %></h5>
