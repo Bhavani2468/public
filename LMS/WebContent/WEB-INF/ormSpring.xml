@@ -53,5 +53,6 @@
 	<!-- byName example -->
     <bean id="dao" class="com.service.AppService" autowire="byName"/>
     <bean id="serv" class="com.Dao.DAOImp" autowire="byName"/>
-    <bean id="us" class="com.models.UserSession" autowire = "byName"/>
+    <bean id="uss" class="com.models.UserSession" autowire="byName"/>
+
 </beans>

@@ -79,20 +79,14 @@
     <script>
         document.getElementById('loginForm').addEventListener('submit', function (e) {
             e.preventDefault(); 
-            var user=document.getElementById("username").value;
-            var pass=document.getElementById("password").value;
-			
-            const userType = document.getElementById('usertype').value;
-
-            
- 
+            var userType = document.getElementById('usertype').value;
             if (userType === 'user') {
             	
-                this.action = 'personaldetails?username='+user+'&password='+pass; 
+                this.action = 'personaldetails'; 
                 
             } else if (userType === 'admin') {
             	
-                this.action = 'admin?username='+user+'&password='+pass;
+                this.action = 'admin';
                 
             }
 

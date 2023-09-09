@@ -17,7 +17,7 @@ create table H_loanApplicationEMIMaster
     lemi_sanctioned_amount numeric
 );
 
-select * from H_loamemischedule;
+select * from H_loanemischedule;
 
 
 
@@ -68,16 +68,16 @@ create table H_users
 drop table H_users;
 select * from H_users;
 
-insert into H_users(user_name,user_pwd,user_email ,user_recoverymail, user_mobile , user_cdate ,user_type ) values();
+insert into H_users(user_name,user_pwd,user_email ,user_recoverymail, user_mobile , user_type ) values('pk','1234','pk@gmail.com','pk@gmail.com',998877665,'user');
 
 create table H_user_sessions
 (
     ussn_id serial primary key,
     user_id int,
-    ussn_sessionid varchar(20),
+    ussn_sessionid varchar(100),
     ussn_cdate timestamp,
     ussn_key varchar(100),
-    ussn_host varchar(20),
+    ussn_host varchar(50),
     ussn_exptime timestamp,
     ussn_status char(2)
 );
@@ -85,5 +85,9 @@ drop table H_user_sessions;
 
 select * from H_user_sessions;
 
+
+create table usessions as select * from H_user_sessions;
+
+select * from usessions;
 
 

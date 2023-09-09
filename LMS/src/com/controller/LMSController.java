@@ -68,7 +68,7 @@ public class LMSController {
 		return "error";
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String getAllEmployees(Model model) {
+	public String getAllEmployees() {
 
 		return "login";
 	}

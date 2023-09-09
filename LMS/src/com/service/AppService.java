@@ -70,20 +70,19 @@ public class AppService {
 	}
 
 	@Autowired
-	private UserSession us ;
-	
-	
+	private UserSession uss;
+
 	@Transactional
 	public void sendData(String sessionId, String key, String hostAddress) {
 		
-		us.setUser_id(1);
-		us.setUssn_sessionid(sessionId);
-		us.setUssn_key(key);
-		us.setUssn_host(hostAddress);
-		us.setUssn_cdate(LocalDateTime.now());
-		us.setUssn_expdate(LocalDateTime.now().plusMinutes(30));
-		us.setUssn_status("ac");
+		uss.setUser_id(1);
+		uss.setUssn_sessionid(sessionId);
+		uss.setUssn_key(key);
+		uss.setUssn_host(hostAddress);
+		uss.setUssn_cdate(LocalDateTime.now());
+		uss.setUssn_expdate(LocalDateTime.now().plusMinutes(30));
+		uss.setUssn_status("ac");
 		
-		usd.persist(us);
+		usd.persist(uss);
 	}
 }
