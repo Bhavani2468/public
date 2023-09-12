@@ -69,6 +69,9 @@ drop table H_users;
 select * from H_users;
 
 insert into H_users(user_name,user_pwd,user_email ,user_recoverymail, user_mobile , user_cdate ,user_type ) values('pk','1234','pk@gmail.com','pk@gmail.com',99087766,'2023-09-11','user');
+insert into H_users(user_name,user_pwd,user_email ,user_recoverymail, user_mobile , user_cdate ,user_type ) values('bhavs','1234','pk@gmail.com','pk@gmail.com',99087766,'2023-09-11','admin');
+
+
 
 create table H_user_sessions
 (
@@ -134,8 +137,8 @@ select * from h_loanapplicants;
 
 create table H_privileges
 (
-    pid serial primary key,
-    priv_id int,
+    priv_id serial primary key,
+	priv_usr varchar(10),
     priv_name varchar(100),
     priv_rpattern varchar(100),
     priv_action varchar(10)
@@ -144,25 +147,13 @@ create table H_privileges
 drop table H_privileges;
 select * from H_privileges;
 
-insert into H_privileges(priv_id,priv_name ,priv_rpattern , priv_action) values(0,'login page','/login','GET');
-insert into H_privileges(priv_id,priv_name ,priv_rpattern , priv_action) values(1,'login page','/login','GET');
-insert into H_privileges(priv_id,priv_name ,priv_rpattern , priv_action) values(0,'admin home','/admin','GET');
-insert into H_privileges(priv_id,priv_name ,priv_rpattern , priv_action) values(1,'user home','/personaldetails','GET');
+insert into H_privileges(priv_usr,priv_name ,priv_rpattern , priv_action) values('admin','login page','/login','GET');
+insert into H_privileges(priv_usr,priv_name ,priv_rpattern , priv_action) values('user','login page','/login','GET');
+insert into H_privileges(priv_usr,priv_name ,priv_rpattern , priv_action) values('admin','admin home','/admin','GET');
+insert into H_privileges(priv_usr,priv_name ,priv_rpattern , priv_action) values('user','user home','/personaldetails','GET');
 
 
 
-insert into H_privileges(priv_id,priv_name ,priv_rpattern , priv_action) values(0,'admin loan details','/adminld','GET');
-insert into H_privileges(priv_id,priv_name ,priv_rpattern , priv_action) values(0,'admin loan details page2','/adminld1','GET');
-insert into H_privileges(priv_id,priv_name ,priv_rpattern , priv_action) values(0,'admin loan details page3','/adminld2','GET');
-
-
-
-
-
-
-
-
-
-
-
-
+insert into H_privileges(priv_usr,priv_name ,priv_rpattern , priv_action) values('admin','admin loan details','/adminld','GET');
+insert into H_privileges(priv_usr,priv_name ,priv_rpattern , priv_action) values('admin','admin loan details page2','/adminld1','GET');
+insert into H_privileges(priv_usr,priv_name ,priv_rpattern , priv_action) values('admin','admin loan details page3','/adminld2','GET');
