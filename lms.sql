@@ -17,7 +17,7 @@ create table H_loanApplicationEMIMaster
     lemi_sanctioned_amount numeric
 );
 
-select * from H_loanemischedule;
+select * from H_loamemischedule;
 
 
 
@@ -68,26 +68,101 @@ create table H_users
 drop table H_users;
 select * from H_users;
 
-insert into H_users(user_name,user_pwd,user_email ,user_recoverymail, user_mobile , user_type ) values('pk','1234','pk@gmail.com','pk@gmail.com',998877665,'user');
+insert into H_users(user_name,user_pwd,user_email ,user_recoverymail, user_mobile , user_cdate ,user_type ) values('pk','1234','pk@gmail.com','pk@gmail.com',99087766,'2023-09-11','user');
 
 create table H_user_sessions
 (
     ussn_id serial primary key,
     user_id int,
-    ussn_sessionid varchar(100),
+    ussn_sessionid varchar(200),
     ussn_cdate timestamp,
     ussn_key varchar(100),
     ussn_host varchar(50),
     ussn_exptime timestamp,
     ussn_status char(2)
 );
-drop table H_user_sessions;
+
+create table usr_sessions
+(
+    ussn_id serial primary key,
+    user_id int,
+    ussn_sessionid varchar(200),
+    ussn_cdate timestamp,
+    ussn_key varchar(100),
+    ussn_host varchar(50),
+    ussn_exptime timestamp,
+    ussn_status char(2)
+);
+
+
+drop table usessions;
 
 select * from H_user_sessions;
 
+create table usessions as 
+select * from H_user_sessions;
 
-create table usessions as select * from H_user_sessions;
+select * from usr_sessions;
 
-select * from usessions;
+insert into usr_sessions(user_id ,
+    ussn_sessionid ,
+    ussn_cdate ,
+    ussn_key ,
+    ussn_host ,
+    ussn_exptime ,
+    ussn_status ) values(1,'7288FA70BCEA3202D80BDE521E153FCC','2023-09-11 12:01:05.519271','7616c57dd34d4c71b398e83d5bf0f0e7','0:0:0:0:0:0:0:1','2023-09-11 12:31:05.519271','ac');
+
+
+create table users_uri
+(
+    uri_id serial primary key,
+    user_uri varchar(200)
+);
+
+drop table users_uri;
+
+select * from users_uri;
+
+insert into users_uri(user_uri) values('http://localhost:8081/LMS/adminld2');
+
+
+
+
+
+select * from h_loanapplicants;
+
+
+create table H_privileges
+(
+    pid serial primary key,
+    priv_id int,
+    priv_name varchar(100),
+    priv_rpattern varchar(100),
+    priv_action varchar(10)
+);
+
+drop table H_privileges;
+select * from H_privileges;
+
+insert into H_privileges(priv_id,priv_name ,priv_rpattern , priv_action) values(0,'login page','/login','GET');
+insert into H_privileges(priv_id,priv_name ,priv_rpattern , priv_action) values(1,'login page','/login','GET');
+insert into H_privileges(priv_id,priv_name ,priv_rpattern , priv_action) values(0,'admin home','/admin','GET');
+insert into H_privileges(priv_id,priv_name ,priv_rpattern , priv_action) values(1,'user home','/personaldetails','GET');
+
+
+
+insert into H_privileges(priv_id,priv_name ,priv_rpattern , priv_action) values(0,'admin loan details','/adminld','GET');
+insert into H_privileges(priv_id,priv_name ,priv_rpattern , priv_action) values(0,'admin loan details page2','/adminld1','GET');
+insert into H_privileges(priv_id,priv_name ,priv_rpattern , priv_action) values(0,'admin loan details page3','/adminld2','GET');
+
+
+
+
+
+
+
+
+
+
 
 
