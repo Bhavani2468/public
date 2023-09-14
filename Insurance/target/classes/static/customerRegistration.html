@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>User Registration</title>
+    <style>
+        /* Your styles here */
+    </style>
+    <!-- Load jQuery separately -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Separate script for handling button click -->
+    <script>
+        $(document).ready(function () {
+            $("#CustRegisterButton").click(function () {
+                var formData = $("#registrationForm").serialize();
+				console.log(formData);
+                $.ajax({
+                    type: "POST",
+                    url: "createCustomer", 
+                    data: formData,
+                    success: function (response) {
+                        window.location.href="RegistrationSuccessful.html";
+                    },
+                    error: function (error) {
+                        alert("Error: " + error.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+   <form id="CustRegistrationForm" action="#">
+    First Name:
+    <input type="text" id="fname" name="cust_fname" required><br><br>
+    
+    Last Name:
+    <input type="text" id="lname" name="cust_lname" required><br><br>
+    
+	Date Of Birth:
+    <input type="date" id="dob" name="cust_dob"><br><br>
+    
+    Address:
+    <input type="text" id="address" name="cust_address"><br><br>
+    
+    Gender:
+    <select id="gender" name="cust_gender" required>
+        <option value="male">male</option>
+        <option value="female">female</option>
+    </select><br><br>
+    
+    Aadhar:
+    <input type="number" id="aadhar" name="cust_aadhar"><br><br>
+    
+    
+    <input type="button" id="registerButton" value="Create Account">
+</form>
+
+</body>
+</html>

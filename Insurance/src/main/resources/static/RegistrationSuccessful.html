@@ -3,8 +3,81 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+<script>
+$(document).ready(function () {
+    $("#packs").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "getPacks", 
+            success: function (data) {
+            	$('#dataTable').DataTable({
+                    data: data,
+                    columns: [
+                        { data: 'insp_title' }, 
+                        { data: 'insp_desc' },
+                        { data: 'insp_status' },
+                        { data: 'insp_range_start' },
+                        { data: 'insp_range_end' },
+                        { data: 'insp_agelimit_start' },
+                        { data: 'insp_agelimit_end' }
+                    ]
+                });
+                console.log(data);
+            },
+            error: function (error) {
+                console.error(error);
+            },
+        });
+    });
+});
+
+$("#updateStatus").click(function () {
+    // Get the user ID or other necessary data
+    var userId = 1; // Replace with the actual user ID
+
+    // Define the new status
+    var newStatus = "dc"; // Replace with the new status value
+
+    // Send the PUT request to update the user status
+    $.ajax({
+        type: "PUT",
+        url: "updateUserStatus/" + userId, // Replace with your API endpoint
+        data: JSON.stringify({ status: newStatus }), // Assuming you're sending JSON data
+        contentType: "application/json",
+        success: function (response) {
+            console.log("User status updated successfully");
+            // You can update the UI or perform other actions here
+        },
+        error: function (error) {
+            console.error("Error updating user status", error);
+        },
+    });
+});
+
+</script>
 </head>
 <body>
-<h1>Successfully registered..!</h1>
+<h1>Successfully registered..!</h1><input type="button" id="updateStatus" name="updateStatus" value="Inactivate account">
+<input type="button" id="packs" name="packs" value="Get Insurance packagaes">
+<table id="dataTable" class="display">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Range Start</th>
+            <th>Range End</th>
+            <th>Age Limit Start</th>
+            <th>Age Limit End</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
 </body>
 </html>

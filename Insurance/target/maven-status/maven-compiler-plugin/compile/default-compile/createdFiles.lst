@@ -1,0 +1,6 @@
+InsuranceSystem\ims\service\UserService.class
+InsuranceSystem\ims\Controller\FrontController.class
+InsuranceSystem\ims\InsuranceApplication.class
+InsuranceSystem\ims\models\Users.class
+InsuranceSystem\ims\Repository\IUserRepository.class
+InsuranceSystem\ims\Repository\UsersRepository.class
