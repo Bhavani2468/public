@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>User Registration</title>
+    <style>
+        /* Your styles here */
+    </style>
+    <!-- Load jQuery separately -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Separate script for handling button click -->
+    <script>
+        $(document).ready(function () {
+            $("#registerButton").click(function () {
+                var formData = $("#registrationForm").serialize();
+				console.log(formData);
+                $.ajax({
+                    type: "POST",
+                    url: "createUser", 
+                    data: formData,
+                    success: function (response) {
+                        window.location.href="RegistrationSuccessful.html";
+                    },
+                    error: function (error) {
+                        alert("Error: " + error.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+   <form id="registrationForm" action="#">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="user_name" required><br><br>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="user_pwd" required><br><br>
+    
+    <label for="userType">User Type:</label>
+    <select id="userType" name="user_type" required>
+        <option value="customer">Customer</option>
+        <option value="admin">Admin</option>
+    </select><br><br>
+    
+    <input type="button" id="registerButton" value="Register">
+</form>
+
+</body>
+</html>
