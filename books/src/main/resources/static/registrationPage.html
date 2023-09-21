@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Books Publications</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $("#publishingHouseFormButton").click(function() {
+           
+            var formData = $("#publishHouseForm").serialize();
+
+           console.log(formData);
+            $.ajax({
+                type: "POST",
+                url: "registerHouse", 
+                data: formData,
+                success: function(response) 
+                {
+                    console.log(response);
+                }
+            });
+        });
+
+        $("#bookFormButton").click(function() {
+           
+
+            var formData = $("#bookForm").serialize();
+			console.log(formData);
+           
+            $.ajax({
+                type: "POST",
+                url: "addBook",
+                data: formData,
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+        });
+    });
+</script>
+
+</head>
+<body>
+	<center>
+<!-- Publishing House Registration Form -->
+<div id="publishingHouseForm" class="form-container">
+    <h2 style="padding: 30px;">Register Publishing House</h2>
+    <form id="publishHouseForm" action="#">
+        <label for="house_title">Publishing House Title:</label>
+        <input type="text" id="house_title" name="house_title" required><br><br>
+
+        <label for="founded_date">Founded Date:</label>
+        <input type="date" id="founded_date" name="founded_date" required><br><br>
+
+        <input type="button" value="Register" id="publishingHouseFormButton">
+    </form>
+</div>
+
+<!-- Book Registration Form -->
+<div id="booksForm" class="form-container">
+    <h2 style="padding: 30px;">Add New Book</h2>
+    <form id="bookForm" action="#">
+        <label for="bname">Book Name:</label>
+        <input type="text" id="bname" name="bname" required><br><br>
+
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required><br><br>
+
+        <label for="published_date">Published Date:</label>
+        <input type="date" id="published_date" name="published_date" required><br><br>
+
+        <label for="published_house_id">Publishing House ID:</label>
+        <input type="number" id="published_house_id" name="published_house_id" required><br><br>
+
+        <input type="button" value="Add Book" id="bookFormButton">
+    </form>
+</div>
+</center>
+</body>
+</html>
