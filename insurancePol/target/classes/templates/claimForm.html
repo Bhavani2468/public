@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Form</title>
+</head>
+<body>
+	<center>
+    <h1>Claim Form</h1>
+    <form th:action="@{/submit}" method="post">
+        Document Title:
+        <input type="text" id="name" name="name" th:value="${docTitle}" /><br><br>
+        Document path:
+        <input type="text" id="name" name="name" th:value="${docPath}" /><br><br>
+        Claim amount:
+        <input type="number" id="name" name="name" th:value="${cAmount}" /><br><br>
+        Processed User:
+        <input type="number" id="name" name="name" th:value="${usrid}" /><br><br>
+        Remarks:
+        <input type="text" id="name" name="name" th:value="${remarks}" /><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+    </center>
+</body>
+</html>
