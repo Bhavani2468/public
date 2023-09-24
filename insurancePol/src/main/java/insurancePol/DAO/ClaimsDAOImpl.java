@@ -23,9 +23,16 @@ public class ClaimsDAOImpl implements ClaimsDAO{
 	
 	@Override
 	public boolean createClaim(ClaimBills cm,List<Bill> bills) {
-		//String insertQuery = "INSERT INTO ClaimBills (claim_id,clbl_billindex,clbl_document_title,clbl_document_path,clbl_claim_amount,clbl_processed_by,clbl_remarks,clbl_status) VALUES (?,?,?,?,?,?,?,?)";
-       // return jdbcTemplate.update(insertQuery, 1,cm.getClbl_billindex(),cm.getClbl_document_title(),cm.getClbl_document_path(),cm.getClbl_claim_amount(),cm.getClbl_processed_by(),cm.getClbl_remarks(),cm.getClbl_status(),"full") > 0;
-	return false;
+		String ClaimsInsert = "INSERT INTO ClaimBills (clbl_claim_amount,clbl_processed_by,clbl_remarks,clbl_status) VALUES (?,?,?,?)";
+		String BillsInsert="";
+		boolean flag=true;
+		if(flag)
+		{
+		for(int i=0;i<bills.size();i++)
+		   flag = jdbcTemplate.update("INSERT INTO Bill (clbl_document_title,clbl_document_path) VALUES (?,?)",bills.get(i).getClbl_document_title(),bills.get(i).getClbl_document_path()) > 0;
+		}
+
+       return jdbcTemplate.update(ClaimsInsert,cm.getClbl_claim_amount(),cm.getClbl_processed_by(),cm.getClbl_remarks(),"full")>0 && flag;
 	}
 
 }

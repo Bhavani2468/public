@@ -1,6 +1,6 @@
 package insurancePol.repository;
 
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,12 +20,13 @@ public class ClaimRepository {
 		String docPaths[]=cm.getClbl_document_path().split(",");
 		if(docTitles.length==docPaths.length)
 		{
-			List<Bill> bills=null;
+			List<Bill> bills=new ArrayList<>();
 		for(int i=0;i<docTitles.length;i++)
 		{
 			Bill b=new Bill();	
 			b.setClbl_document_title(docTitles[i]);
 			b.setClbl_document_title(docPaths[i]);
+			bills.add(b);
 			System.out.println("At repository"+docTitles[i]+" "+docPaths[i]);
 		}
 		
