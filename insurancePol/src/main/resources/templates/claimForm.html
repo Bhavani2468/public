@@ -3,21 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Sample Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-	<center>
+    <center>
     <h1>Claim Form</h1>
     <form th:action="@{/submit}" method="post">
-        Document Title:
-        <input type="text" id="name" name="name" th:value="${docTitle}" /><br><br>
-        Document path:
-        <input type="text" id="name" name="name" th:value="${docPath}" /><br><br>
-        Claim amount:
-        <input type="number" id="name" name="name" th:value="${cAmount}" /><br><br>
-        Processed User:
-        <input type="number" id="name" name="name" th:value="${usrid}" /><br><br>
-        Remarks:
-        <input type="text" id="name" name="name" th:value="${remarks}" /><br><br>
+        <label for="docTitle">Document Title:</label>
+        <input type="text" id="docTitle" name="docTitle" th:value="${docTitle}" /><br><br>
+        <label for="docPath">Document path:</label>
+        <input type="text" id="docPath" name="docPath" th:value="${docPath}" /><br><br>
+        <label for="cAmount">Claim amount:</label>
+        <input type="number" id="cAmount" name="cAmount" th:value="${cAmount}" /><br><br>
+        <label for="usrid">Processed User:</label>
+        <input type="number" id="usrid" name="usrid" th:value="${usrid}" /><br><br>
+        <label for="remarks">Remarks:</label>
+        <input type="text" id="remarks" name="remarks" th:value="${remarks}" /><br><br>
 
         <button type="submit">Submit</button>
     </form>
