@@ -54,24 +54,17 @@
     <center>
     <h1>Claim Form</h1>
     <form th:action="@{/submit}" method="post">
-        <div th:each="bill, billStat : ${bills}">
-        <label for="documentTitle">Document Title:</label>
-        <input type="text" id="documentTitle" name="bills[__${billStat.index}__].documentTitle"
-               th:value="${bill.documentTitle}" /><br><br>
-        <label for="documentPath">Document path:</label>
-        <input type="text" id="documentPath" name="bills[__${billStat.index}__].documentPath"
-               th:value="${bill.documentPath}" /><br><br>
-        <label for="claimAmount">Claim amount:</label>
-        <input type="number" id="claimAmount" name="bills[__${billStat.index}__].claimAmount"
-               th:value="${bill.claimAmount}" /><br><br>
-        <label for="processedAmount">Processed Amount:</label>
-        <input type="number" id="processedAmount" name="bills[__${billStat.index}__].processedAmount"
-               th:value="${bill.processedAmount}" /><br><br>
-    </div><br><br>
-        <label for="usrid">Processed User:</label>
-        <input type="number" id="usrid" name="usrid" th:value="${clbl_processed_by}" /><br><br>
-        <label for="remarks">Remarks:</label>
-        <input type="text" id="remarks" name="remarks" th:value="${clbl_remarks}" /><br><br>
+        <label for="clbl_document_title">Document Title:</label>
+<input type="text" id="clbl_document_title" name="clbl_document_title" th:value="${clbl_document_title}" /><br><br>
+<label for="clbl_document_path">Document path:</label>
+<input type="text" id="clbl_document_path" name="clbl_document_path" th:value="${clbl_document_path}" /><br><br>
+<label for="clbl_claim_amount">Claim amount:</label>
+<input type="number" id="clbl_claim_amount" name="clbl_claim_amount" th:value="${clbl_claim_amount}" /><br><br>
+<label for="clbl_processed_by">Processed User:</label>
+<input type="number" id="clbl_processed_by" name="clbl_processed_by" th:value="${clbl_processed_by}" /><br><br>
+<label for="clbl_remarks">Remarks:</label>
+<input type="text" id="clbl_remarks" name="clbl_remarks" th:value="${clbl_remarks}" /><br><br>
+
 
         <button type="submit">Submit</button>
     </form>

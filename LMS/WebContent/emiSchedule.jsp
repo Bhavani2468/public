@@ -4,6 +4,39 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<style>
+/* Add CSS styles for borders */
+.emi-schedule {
+    border-collapse: collapse; /* Collapse borders to avoid spacing */
+    width: 100%; /* Optional: Set the table width */
+}
+
+.emi-schedule th, .emi-schedule td {
+    border: 1px solid #ddd; /* Add a 1px solid gray border to table cells */
+    padding: 12px; /* Increase padding for better spacing */
+    text-align: center; /* Center-align text in cells */
+}
+
+.emi-schedule th {
+    background-color: #f2f2f2; /* Add background color to header cells */
+    font-weight: bold; /* Make the header text bold */
+}
+
+.emi-schedule td:first-child {
+    font-weight: bold; /* Make the first column text bold */
+}
+
+/* Add some spacing and center the table container */
+#emi-schedule-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Style the page heading */
+h2 {
+    color: #333; /* Change the heading text color */
+}
+</style>
 <title>EMI Schedule</title>
 <style>
 /* Add CSS styles for borders */

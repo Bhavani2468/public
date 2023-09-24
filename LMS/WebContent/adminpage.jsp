@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
+    <title>Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,84 +11,125 @@
             padding: 0;
         }
 
-        header {
+        .header {
             background-color: #007bff;
-            color: #fff;
+            color: white;
             padding: 20px;
             text-align: center;
         }
 
-        nav {
+        .navbar {
             background-color: #333;
-            color: #fff;
-            padding: 10px;
+            overflow: hidden;
         }
 
-        nav ul {
-            list-style-type: none;
-            padding: 0;
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar p {
+            float: right;
+            display: block;
+            color: white;
+            text-align: center;
+          	
+            text-decoration: none;
         }
 
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 20px auto;
+            display: flex;
+            justify-content: space-around;
             padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px #aaa;
-        }
-
-        h1 {
-            color: #333;
         }
 
         .dashboard-item {
-            background-color: #f9f9f9;
+            text-align: center;
+            background-color: #f2f2f2;
             padding: 20px;
-            margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            width: 30%;
         }
 
-        footer {
+        .dashboard-item a {
+            text-decoration: none;
+        }
+
+        .dashboard-item h2 {
+            margin: 0;
+        }
+
+        .dashboard-item p {
+            margin-top: 10px;
+        }
+
+        .dashboard-item button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .dashboard-item button:hover {
+            background-color: #0056b3;
+        }
+
+        .footer {
             background-color: #333;
-            color: #fff;
+            color: white;
+            padding: 20px;
             text-align: center;
-            padding: 10px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Admin Dashboard</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Admins</a></li>
-            <li><a href="#">Loans</a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Settings</a></li>
-        </ul>
-    </nav>
-    <div class="container">
-    	<div class="dashboard-item">
-            <center><h2>Welcome</h2></center>
-            <!-- Add a list of recent users here -->
-        </div>
-        <div class="dashboard-item">
-            <center><a href="ld"><button><h2>Get Loan Details</h2></button></a></center>
-            <!-- Add your statistics and charts here -->
-        </div>
+<% String un=request.getParameter("username");
+String ut = ""+request.getParameter("usertype");
+%>
+<div class="header">
+    <h1>Welcome to Dashboard</h1>
+</div>
+<div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Contact</a>
+    <p>👤 <%=un %></p>
+</div>
+
+<div class="container">
+    <div class="dashboard-item">
+        <a href="adminld1?usertype=<%=ut %>">
+            <button><h2>Processed Loans</h2></button>
+        </a>
+        <p>View and manage processed loan applications.</p>
     </div>
-    <footer>
-        &copy; 2023 Admin Dashboard
-    </footer>
+    <div class="dashboard-item">
+        <a href="adminld?un=<%=un %>&usertype=<%=ut %>">
+            <button><h2>InProgress Loans</h2></button>
+        </a>
+        <p>Track loans that are currently in progress.</p>
+    </div>
+    <div class="dashboard-item">
+        <a href="adminld2?usertype=<%=ut %>">
+            <button><h2>Rejected Loans</h2></button>
+        </a>
+        <p>Review and manage rejected loan applications.</p>
+    </div>
+</div>
+<div class="footer">
+    <p>&copy; 2023 Pennant. All rights reserved.</p>
+</div>
 </body>
 </html>

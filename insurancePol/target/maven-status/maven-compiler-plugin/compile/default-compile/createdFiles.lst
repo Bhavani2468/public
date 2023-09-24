@@ -1,2 +1,8 @@
 insurancePol\InsurancePolApplication.class
-insurancePol\Controller\PolicyController.class
+insurancePol\models\Users.class
+insurancePol\DAO\ClaimsDAO.class
+insurancePol\DAO\ClaimsDAOImpl.class
+insurancePol\models\ClaimBills.class
+insurancePol\models\Bill.class
+insurancePol\repository\ClaimRepository.class
+insurancePol\Controller\ClaimsController.class

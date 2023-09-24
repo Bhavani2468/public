@@ -2,6 +2,76 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            color: #333;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        #disposableAmount {
+            font-weight: bold;
+        }
+        
+        #loanAmountNote {
+            color: #FF0000;
+        }
+
+        #emiRange {
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
     <title>Loan Eligibility Form</title>
     <script>
         // Function to populate the "Number of Years" or "Number of Months" dropdown dynamically
@@ -93,7 +163,7 @@
             if (years > 0 ) {
                 var months = numberOfYears * 12; 
                 document.getElementById("months").value=months;
-                var emiAmount = (loanAmt / months).toFixed(2);
+                var emiAmount = (loanAmt*0.13*(1+0.13)**(months))/((1.13)**(months-1));
                 document.getElementById("emiAmt").value=emiAmount;
                 emiRangeDiv.textContent = "Rs. " + emiAmount + " per month for " + numberOfYears + " years";
             } else {

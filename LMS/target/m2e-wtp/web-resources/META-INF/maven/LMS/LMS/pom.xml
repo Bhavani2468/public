@@ -66,18 +66,23 @@
 			<version>1.8.0.7</version>
 		</dependency>
 		<dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>5.0.0</version> <!-- Use the latest version available -->
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>5.0.0</version> <!-- Use the latest version available -->
+    </dependency>
+    <dependency>
    		 	<groupId>javax.servlet</groupId>
     			<artifactId>javax.servlet-api</artifactId>
   	 		<version>4.0.1</version> <!-- Use the appropriate version for your container -->
     			<scope>provided</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>CRUD</groupId>
-			<artifactId>CRUD</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-  </dependencies>
+	</dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>

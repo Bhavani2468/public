@@ -10,17 +10,14 @@ public class ClaimBills {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int clam_id;
-
-    private Integer clbl_billindex;
     private String clbl_document_title;
     private String clbl_document_path;
     private Double clbl_claim_amount;
     private Double clbl_processed_amount;
     private Date clbl_processed_date;
 
-    @ManyToOne
-    @JoinColumn(name = "clbl_processed_by")
-    private Users clbl_processed_by;
+    
+    private int clbl_processed_by;
 
     private String clbl_remarks;
     private String clbl_status;
@@ -30,12 +27,7 @@ public class ClaimBills {
 	public void setClam_id(int clam_id) {
 		this.clam_id = clam_id;
 	}
-	public Integer getClbl_billindex() {
-		return clbl_billindex;
-	}
-	public void setClbl_billindex(Integer clbl_billindex) {
-		this.clbl_billindex = clbl_billindex;
-	}
+	
 	public String getClbl_document_title() {
 		return clbl_document_title;
 	}
@@ -66,10 +58,10 @@ public class ClaimBills {
 	public void setClbl_processed_date(Date clbl_processed_date) {
 		this.clbl_processed_date = clbl_processed_date;
 	}
-	public Users getClbl_processed_by() {
+	public int getClbl_processed_by() {
 		return clbl_processed_by;
 	}
-	public void setClbl_processed_by(Users clbl_processed_by) {
+	public void setClbl_processed_by(int clbl_processed_by) {
 		this.clbl_processed_by = clbl_processed_by;
 	}
 	public String getClbl_remarks() {
