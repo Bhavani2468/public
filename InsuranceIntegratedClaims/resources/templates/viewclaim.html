@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Claims Details</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #007acc;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .claim-info {
+            margin-bottom: 20px;
+        }
+
+        /* Add styles for editable fields */
+        .editable-field {
+            display: inline-block;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        /* Style labels differently */
+        .label {
+            font-weight: bold;
+            color: #007acc;
+            display: inline-block;
+            width: 180px; /* Adjust width as needed */
+        }
+
+        .save-button {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Claims Details</h1>
+
+        <div class="claim-info">
+            <span class="label">Claim ID:</span>
+            <span th:text="${claim.clamId}"></span>
+        </div>
+
+        <div class="claim-info">
+            <span class="label">Claim Source:</span>
+            <span th:text="${claim.clamSource}"></span>
+        </div>
+
+        <div class="claim-info">
+            <span class="label">Claim Type:</span>
+            <span th:text="${claim.clamType}"></span>
+        </div>
+
+        <div class="claim-info">
+            <span class="label">Claim Date:</span>
+            <span th:text="${claim.clamDate}"></span>
+        </div>
+        
+          <div class="claim-info">
+            <span class="label">Claim IPLC ID:</span>
+            <span th:text="${claim.clamIplcId}"></span>
+        </div>
+
+        <div class="claim-info">
+            <span class="label"> Requested Amount:</span>
+            <span th:text="${claim.clamAmountRequested}"></span>
+        </div>
+
+        <div class="claim-info">
+            <span class="label">Processed Amount:</span>
+            <span class="editable-field" th:text="${claim.clamProcessedAmount}" id="ProcessedAmountValue"></span>
+            <input type="text" id="ProcessedAmountInput" style="display: none;" class="form-control" />
+        </div>
+
+        <div class="claim-info">
+            <span class="label">Claim Processed Date:</span>
+            <span th:text="${claim.clamProcessedDate}"></span>
+        </div>
+
+        <div class="claim-info">
+            <span class="label">Claim Processed By:</span>
+            <span th:text="${claim.clamProcessedBy}"></span>
+        </div>
+
+        <div class="claim-info">
+            <span class="label">Claim Remarks:</span>
+            <span class="editable-field" th:text="${claim.clamRemarks}" id="remarksValue"></span>
+            <input type="text" id="remarksInput" style="display: none;" class="form-control" />
+        </div>
+
+        <div class="claim-info">
+            <span class="label">Claim Status:</span>
+            <span class="editable-field" th:text="${claim.clamStatus}" id="statusValue"></span>
+            <input type="text" id="statusInput" style="display: none;" class="form-control" />
+        </div>
+
+        <button class="btn btn-primary" onclick="editStatus()">Edit</button>
+        <form action="processClaim" method="POST">
+            <input type="hidden" id="clamId" name="clamId" th:value="${claim.clamId}" />
+            <input type="hidden" id="clamRemarks" name="clamRemarks" value="" />
+            <input type="hidden" id="clamStatus" name="clamStatus" value="" />
+            <input type="hidden" id="clamProcessedAmount" name="clamProcessedAmount" value="" />
+            <input type="submit" class="btn btn-success" onclick="doo()" value="Save">
+        </form>
+        <a class="btn btn-primary" th:href="@{'/getDiseases?policy=' + ${claim.clamIplcId}}">List Covered Diseases</a>
+        <a class="btn btn-primary" th:href="@{'/allclaimbills?claimid=' + ${claim.clamId}}">Claim Bills</a>
+
+        <script>
+            function editStatus() {
+                const statusSpan = document.getElementById("statusValue");
+                const statusInput = document.getElementById("statusInput");
+
+                statusInput.value = statusSpan.innerText;
+                statusSpan.style.display = "none";
+                statusInput.style.display = "inline-block";
+
+                const remarksSpan = document.getElementById("remarksValue");
+                const remarksInput = document.getElementById("remarksInput");
+
+                remarksInput.value = remarksSpan.innerText;
+                remarksSpan.style.display = "none";
+                remarksInput.style.display = "inline-block";
+
+                const pamtSpan = document.getElementById("ProcessedAmountValue");
+                const ProcessedAmountInput = document.getElementById("ProcessedAmountInput");
+
+                ProcessedAmountInput.value = pamtSpan.innerText;
+                pamtSpan.style.display = "none";
+                ProcessedAmountInput.style.display = "inline-block";
+            }
+
+            function doo() {
+                const statusSpan = document.getElementById("statusInput").value;
+                const remarksSpan = document.getElementById("remarksInput").value;
+                const a = document.getElementById("ProcessedAmountInput").value;
+
+                var rem = document.getElementById("clamRemarks");
+                var stat = document.getElementById("clamStatus");
+                var b = document.getElementById("clamProcessedAmount");
+                stat.value = statusSpan;
+                rem.value = remarksSpan;
+                b.value = a;
+            }
+        </script>
+    </div>
+</body>
+
+</html>

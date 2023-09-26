@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Applications</title>
+</head>
+<body>
+    <h1>Claim Applications</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Claim ID</th>
+                <th>Member Index</th>
+                <th>Relation</th>
+                <th>Joined Date</th>
+                <th>Patient Name</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Contact Number</th>
+                <th>Address</th>
+                <th>Disease</th>
+                <th>Diagnosis</th>
+                <th>Treatment</th>
+                <th>Claim Amount Requested</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="claimApp : ${claimApplications}">
+                <td th:text="${claimApp.clamIplcId}"></td>
+                <td th:text="${claimApp.memberIndex}"></td>
+                <td th:text="${claimApp.relation}"></td>
+                <td th:text="${claimApp.joinedDate}"></td>
+                <td th:text="${claimApp.patientName}"></td>
+                <td th:text="${claimApp.dateOfBirth}"></td>
+                <td th:text="${claimApp.gender}"></td>
+                <td th:text="${claimApp.contactNumber}"></td>
+                <td th:text="${claimApp.address}"></td>
+                <td th:text="${claimApp.disease}"></td>
+                <td th:text="${claimApp.diagnosis}"></td>
+                <td th:text="${claimApp.treatment}"></td>
+                <td th:text="${claimApp.claimAmountRequested}"></td>
+                <td>
+                    <a th:href="@{'/getClaim?policy=' + ${claimApp.clamIplcId}}">View</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
