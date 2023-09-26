@@ -1,0 +1,33 @@
+<html>
+<head>
+  <!-- Add your HTML head content here -->
+</head>
+<body>
+  <label>money</label>
+  <input type="number" id="money">
+  <button id="rzp-button1" class="btn btn-outline-dark btn-lg"><i class="fas fa-money-bill"></i> make payment</button>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    document.getElementById('rzp-button1').onclick = function (e) {
+      const amount = document.getElementById("money").value; // Get the entered amount
+
+      var options = {
+        "key": "rzp_test_4jwnZunhRo2Y9N",
+        "amount": amount * 100, // Convert amount to minor currency units (e.g., paise for INR)
+        "currency": "INR",
+        // Rest of your options...
+        "handler": function (response) {
+          alert(response.razorpay_payment_id);
+        },
+        // Rest of your options...
+      };
+
+      var rzp1 = new Razorpay(options);
+      rzp1.open();
+      e.preventDefault();
+    }
+  </script>
+</body>
+</html>
+
+
